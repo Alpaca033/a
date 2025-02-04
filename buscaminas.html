@@ -129,7 +129,7 @@
 <button class="button" onclick="startGame()">Comenzar Nuevo Juego</button>
 
 <script>
-// Tama駉 del tablero
+// Tama帽o del tablero
 const rows = 8;
 const cols = 8;
 const totalMines = 10;
@@ -139,7 +139,7 @@ let flagsCount = 0;
 let gameOver = false;
 let gameWon = false;
 
-// Funci髇 para generar un nuevo tablero
+// Funci贸n para generar un nuevo tablero
 function startGame() {
     gameOver = false;
     gameWon = false;
@@ -150,7 +150,7 @@ function startGame() {
     const table = document.getElementById('minesweeper');
     table.innerHTML = '';
 
-    // Crear el tablero vac韔
+    // Crear el tablero vac铆o
     for (let y = 0; y < rows; y++) {
         const row = [];
         for (let x = 0; x < cols; x++) {
@@ -175,7 +175,7 @@ function startGame() {
         }
     }
 
-    // Calcular los n鷐eros adyacentes
+    // Calcular los n煤meros adyacentes
     for (let y = 0; y < rows; y++) {
         for (let x = 0; x < cols; x++) {
             if (board[y][x].mine) continue;
@@ -209,7 +209,7 @@ function startGame() {
     }
 }
 
-// Funci髇 para revelar una celda
+// Funci贸n para revelar una celda
 function revealCell(event) {
     if (gameOver || gameWon) return;
     const x = event.target.dataset.x;
@@ -225,7 +225,7 @@ function revealCell(event) {
         td.classList.add('mine');
         td.innerHTML = '??';
         gameOver = true;
-        document.getElementById('message').innerHTML = 'erdiste! Has tocado una mina. ntenta de nuevo!';
+        document.getElementById('message').innerHTML = '隆Perdiste! Has tocado una mina. 隆Intenta de nuevo!';
         revealAllMines();
         return;
     }
@@ -241,11 +241,11 @@ function revealCell(event) {
 
     if (revealedCount === rows * cols - totalMines) {
         gameWon = true;
-        document.getElementById('message').innerHTML = 'anaste! Has revelado todas las celdas sin minas.';
+        document.getElementById('message').innerHTML = '隆Ganaste! Has revelado todas las celdas sin minas.';
     }
 }
 
-// Funci髇 para colocar o quitar banderas
+// Funci贸n para colocar o quitar banderas
 function flagCell(event) {
     event.preventDefault();
     if (gameOver || gameWon) return;
@@ -269,7 +269,7 @@ function flagCell(event) {
     }
 }
 
-// Funci髇 para revelar todas las minas cuando se pierde
+// Funci贸n para revelar todas las minas cuando se pierde
 function revealAllMines() {
     const cells = document.querySelectorAll('td');
     cells.forEach(cell => {
