@@ -106,7 +106,7 @@
 
 <div id="intro">
     <h2>Bienvenido al Juego de la Serpiente</h2>
-    <p>Controla la serpiente con las teclas de direcci髇 y come la comida. vita chocar con las paredes y contigo mismo!</p>
+    <p>Controla la serpiente con las teclas de direcci贸n y come la comida. 隆Evita chocar con las paredes y contigo mismo!</p>
     <button onclick="startGame()">Comenzar</button>
 </div>
 
@@ -123,15 +123,15 @@
     let score = 0;
     let gameStarted = false;
 
-    // Funci髇 para comenzar el juego
+    // Funci贸n para comenzar el juego
     function startGame() {
         gameStarted = true;
-        document.getElementById("intro").style.display = "none"; // Ocultar introducci髇
+        document.getElementById("intro").style.display = "none"; // Ocultar introducci贸n
         canvas.style.display = "block"; // Mostrar canvas
         gameLoop();
     }
 
-    // Funci髇 principal del juego
+    // Funci贸n principal del juego
     function gameLoop() {
         if (!gameStarted) return;
         clearCanvas();
@@ -164,15 +164,15 @@
     // Verificar colisiones
     function checkCollision() {
         const head = snake[0];
-        // Colisi髇 con las paredes
+        // Colisi贸n con las paredes
         if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height) {
-            alert("Game Over! Tu puntuaci髇 es: " + score);
+            alert("Game Over! Tu puntuaci贸n es: " + score);
             resetGame();
         }
-        // Colisi髇 consigo misma
+        // Colisi贸n consigo misma
         for (let i = 1; i < snake.length; i++) {
             if (head.x === snake[i].x && head.y === snake[i].y) {
-                alert("Game Over! Tu puntuaci髇 es: " + score);
+                alert("Game Over! Tu puntuaci贸n es: " + score);
                 resetGame();
             }
         }
@@ -192,11 +192,11 @@
         ctx.fillRect(food.x, food.y, gridSize, gridSize);
     }
 
-    // Dibujar la puntuaci髇
+    // Dibujar la puntuaci贸n
     function drawScore() {
         ctx.fillStyle = "black";
         ctx.font = "20px Arial";
-        ctx.fillText("Puntuaci髇: " + score, 10, 20);
+        ctx.fillText("Puntuaci贸n: " + score, 10, 20);
     }
 
     // Generar nueva comida
@@ -206,7 +206,7 @@
         return {x, y};
     }
 
-    // Funci髇 para reiniciar el juego
+    // Funci贸n para reiniciar el juego
     function resetGame() {
         snake = [{x: 50, y: 50}];
         direction = {x: gridSize, y: 0};
@@ -216,7 +216,7 @@
         canvas.style.display = "none";
     }
 
-    // Control de las teclas de direcci髇
+    // Control de las teclas de direcci贸n
     document.addEventListener("keydown", function(event) {
         if (event.key === "ArrowUp" && direction.y === 0) direction = {x: 0, y: -gridSize};
         if (event.key === "ArrowDown" && direction.y === 0) direction = {x: 0, y: gridSize};
@@ -230,7 +230,7 @@
             <tr>
                 <th>#</th>
                 <th>Nombre</th>
-                <th>Puntuaci髇</th>
+                <th>Puntuaci贸n</th>
                 <th>Manazanas</th>
             </tr>
         </thead>
@@ -256,13 +256,13 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="4">Tabla de puntuaci髇</td>
+                <td colspan="4">Tabla de puntuaci贸n</td>
             </tr>
         </tfoot>
     </table>
   <main class="contenedor-flex">
 <section class="snake.html">    <a href="snake.html">Juego de la Serpiente</a></section>
-<section class="minesweeper"><a href="minesweeper.html">Buscaminas</a></section>
+<section class="minesweeper"><a href="buscaminas.html">Buscaminas</a></section>
 <section class="formulario.html"><a href="formulario.html">Formulario</a></section>
     
 <footer>
