@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de la Serpiente</title>
+    <style>
+         body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            text-align: center;
+        }
+ 
+        header {
+            background-color: orange;
+            color: black;
+            padding: 1rem;
+        }
+ 
+        h1 {
+            margin: 0;
+        }
+ 
+        canvas {
+            border: 2px solid black;
+            background-color: #fff;
+        }
+        #intro {
+            font-size: 20px;
+            color: #333;
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 10px;
+            width: 300px;
+            margin: 0 auto;
+        }
+        #intro button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #fff;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        #intro button:hover {
+            background-color: #ddd;
+        }
+      table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #e2e2e2;
+        }
+      .contenedor-flex {
+    display: flex;
+    justify-content: space-around; /* Espaciado uniforme */
+    align-items: center;
+    height: 200px;
+    background-color: lightgray;
+}
+ 
+.caja {
+    width: 150px;
+    height: 100px;
+    background-color: steelblue;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+ footer {
+            background-color: grey;
+            color: white;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+  <header> <h1>DETUBAGAMES</h1></header>
+<section>
+</section>
+
+<div id="intro">
+    <h2>Bienvenido al Juego de la Serpiente</h2>
+    <p>Controla la serpiente con las teclas de dirección y come la comida. ¡Evita chocar con las paredes y contigo mismo!</p>
+    <button onclick="startGame()">Comenzar</button>
+</div>
+
+<canvas id="gameCanvas" width="300" height="300" style="display: none;"></canvas>
+
+<script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    const gridSize = 10;
+    let snake = [{x: 50, y: 50}];
+    let direction = {x: gridSize, y: 0};  // Start moving to the right
+    let food = generateFood();
+    let score = 0;
+    let gameStarted = false;
+
+    // Función para comenzar el juego
+    function startGame() {
+        gameStarted = true;
+        document.getElementById("intro").style.display = "none"; // Ocultar introducción
+        canvas.style.display = "block"; // Mostrar canvas
+        gameLoop();
+    }
+
+    // Función principal del juego
+    function gameLoop() {
+        if (!gameStarted) return;
+        clearCanvas();
+        moveSnake();
+        checkCollision();
+        drawSnake();
+        drawFood();
+        drawScore();
+        setTimeout(gameLoop, 100);
+    }
+
+    // Limpiar el canvas
+    function clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    // Mover la serpiente
+    function moveSnake() {
+        const head = {x: snake[0].x + direction.x, y: snake[0].y + direction.y};
+        snake.unshift(head);
+
+        if (head.x === food.x && head.y === food.y) {
+            food = generateFood();
+            score += 10;
+        } else {
+            snake.pop();
+        }
+    }
+
+    // Verificar colisiones
+    function checkCollision() {
+        const head = snake[0];
+        // Colisión con las paredes
+        if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height) {
+            alert("Game Over! Tu puntuación es: " + score);
+            resetGame();
+        }
+        // Colisión consigo misma
+        for (let i = 1; i < snake.length; i++) {
+            if (head.x === snake[i].x && head.y === snake[i].y) {
+                alert("Game Over! Tu puntuación es: " + score);
+                resetGame();
+            }
+        }
+    }
+
+    // Dibujar la serpiente
+    function drawSnake() {
+        ctx.fillStyle = "green";
+        for (let i = 0; i < snake.length; i++) {
+            ctx.fillRect(snake[i].x, snake[i].y, gridSize, gridSize);
+        }
+    }
+
+    // Dibujar la comida
+    function drawFood() {
+        ctx.fillStyle = "red";
+        ctx.fillRect(food.x, food.y, gridSize, gridSize);
+    }
+
+    // Dibujar la puntuación
+    function drawScore() {
+        ctx.fillStyle = "black";
+        ctx.font = "20px Arial";
+        ctx.fillText("Puntuación: " + score, 10, 20);
+    }
+
+    // Generar nueva comida
+    function generateFood() {
+        const x = Math.floor(Math.random() * (canvas.width / gridSize)) * gridSize;
+        const y = Math.floor(Math.random() * (canvas.height / gridSize)) * gridSize;
+        return {x, y};
+    }
+
+    // Función para reiniciar el juego
+    function resetGame() {
+        snake = [{x: 50, y: 50}];
+        direction = {x: gridSize, y: 0};
+        score = 0;
+        gameStarted = false;
+        document.getElementById("intro").style.display = "block";
+        canvas.style.display = "none";
+    }
+
+    // Control de las teclas de dirección
+    document.addEventListener("keydown", function(event) {
+        if (event.key === "ArrowUp" && direction.y === 0) direction = {x: 0, y: -gridSize};
+        if (event.key === "ArrowDown" && direction.y === 0) direction = {x: 0, y: gridSize};
+        if (event.key === "ArrowLeft" && direction.x === 0) direction = {x: -gridSize, y: 0};
+        if (event.key === "ArrowRight" && direction.x === 0) direction = {x: gridSize, y: 0};
+    });
+
+</script>
+  <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Puntuación</th>
+                <th>Manazanas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Alpaca03</td>
+                <td>900</td>
+                <td>90</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Victoraf_07</td>
+                <td>830</td>
+                <td>83</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Fran14propro</td>
+                <td>790</td>
+                <td>79</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">Tabla de puntuación</td>
+            </tr>
+        </tfoot>
+    </table>
+  <main class="contenedor-flex">
+<section class="snake.html">    <a href="snake.html">Juego de la Serpiente</a></section>
+<section class="minesweeper"><a href="minesweeper.html">Buscaminas</a></section>
+<section class="formulario.html"><a href="formulario.html">Formulario</a></section>
+    
+<footer>
+<p>&copy; 2025 Detubagames</p>
+</footer>
+</body>
+</html>

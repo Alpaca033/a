@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscaminas</title>
+    <style>
+         body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            text-align: center;
+        }
+ 
+        header {
+            background-color: orange;
+            color: black;
+            padding: 1rem;
+        }
+ 
+        h1 {
+            margin: 0;
+        }
+  .contenedor-flex {
+    display: flex;
+    justify-content: space-around; /* Espaciado uniforme */
+    align-items: center;
+    height: 200px;
+    background-color: lightgray;
+}
+ 
+.caja {
+    width: 150px;
+    height: 100px;
+    background-color: steelblue;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+ 
+        section {
+            padding: 2rem;
+        }
+ 
+        footer {
+            background-color: grey;
+            color: white;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+      body {
+        
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+        }
+        h1 {
+            font-size: 24px;
+            color: #333;
+        }
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+        td {
+            width: 40px;
+            height: 40px;
+            background-color: #ccc;
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid #999;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        td.revealed {
+            background-color: #fff;
+        }
+        td.mine {
+            background-color: red;
+        }
+        td.flag {
+            background-color: yellow;
+        }
+        td.zero {
+            background-color: #e0e0e0;
+        }
+        .hidden {
+            display: none;
+        }
+        .message {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<header> <h1>FLASHGAMES</h1></header>
+<h2>Juego de Buscaminas</h2>
+  <main class="contenedor-flex">
+<section class="snake.html">    <a href="snake.html">Juego de la Serpiente</a></section>
+<section class="minesweeper"><a href="minesweeper.html">Buscaminas</a></section>
+<section class="formulario.html"><a href="formulario.html">Formulario</a></section>
+</main>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/VdB6Ar1_SeY?si=ALH36--QB1BMvvqj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<div id="message" class="message"></div>
+<table id="minesweeper"></table>
+<button class="button" onclick="startGame()">Comenzar Nuevo Juego</button>
+
+<script>
+// Tamaño del tablero
+const rows = 8;
+const cols = 8;
+const totalMines = 10;
+let board = [];
+let revealedCount = 0;
+let flagsCount = 0;
+let gameOver = false;
+let gameWon = false;
+
+// Función para generar un nuevo tablero
+function startGame() {
+    gameOver = false;
+    gameWon = false;
+    revealedCount = 0;
+    flagsCount = 0;
+    board = [];
+    document.getElementById('message').innerHTML = '';
+    const table = document.getElementById('minesweeper');
+    table.innerHTML = '';
+
+    // Crear el tablero vacío
+    for (let y = 0; y < rows; y++) {
+        const row = [];
+        for (let x = 0; x < cols; x++) {
+            row.push({
+                mine: false,
+                revealed: false,
+                flagged: false,
+                adjacentMines: 0
+            });
+        }
+        board.push(row);
+    }
+
+    // Colocar las minas aleatoriamente
+    let minesPlaced = 0;
+    while (minesPlaced < totalMines) {
+        const x = Math.floor(Math.random() * cols);
+        const y = Math.floor(Math.random() * rows);
+        if (!board[y][x].mine) {
+            board[y][x].mine = true;
+            minesPlaced++;
+        }
+    }
+
+    // Calcular los números adyacentes
+    for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+            if (board[y][x].mine) continue;
+            let adjacentMines = 0;
+            for (let dy = -1; dy <= 1; dy++) {
+                for (let dx = -1; dx <= 1; dx++) {
+                    const nx = x + dx;
+                    const ny = y + dy;
+                    if (nx >= 0 && nx < cols && ny >= 0 && ny < rows && board[ny][nx].mine) {
+                        adjacentMines++;
+                    }
+                }
+            }
+            board[y][x].adjacentMines = adjacentMines;
+        }
+    }
+
+    // Crear la tabla visual
+    for (let y = 0; y < rows; y++) {
+        const tr = document.createElement('tr');
+        for (let x = 0; x < cols; x++) {
+            const td = document.createElement('td');
+            td.dataset.x = x;
+            td.dataset.y = y;
+            td.addEventListener('click', revealCell);
+            td.addEventListener('contextmenu', flagCell);
+
+            tr.appendChild(td);
+        }
+        table.appendChild(tr);
+    }
+}
+
+// Función para revelar una celda
+function revealCell(event) {
+    if (gameOver || gameWon) return;
+    const x = event.target.dataset.x;
+    const y = event.target.dataset.y;
+    const cell = board[y][x];
+
+    if (cell.revealed || cell.flagged) return;
+
+    cell.revealed = true;
+    const td = event.target;
+
+    if (cell.mine) {
+        td.classList.add('mine');
+        td.innerHTML = '??';
+        gameOver = true;
+        document.getElementById('message').innerHTML = '¡Perdiste! Has tocado una mina. ¡Intenta de nuevo!';
+        revealAllMines();
+        return;
+    }
+
+    td.classList.add('revealed');
+    if (cell.adjacentMines > 0) {
+        td.innerHTML = cell.adjacentMines;
+    } else {
+        td.classList.add('zero');
+    }
+
+    revealedCount++;
+
+    if (revealedCount === rows * cols - totalMines) {
+        gameWon = true;
+        document.getElementById('message').innerHTML = '¡Ganaste! Has revelado todas las celdas sin minas.';
+    }
+}
+
+// Función para colocar o quitar banderas
+function flagCell(event) {
+    event.preventDefault();
+    if (gameOver || gameWon) return;
+    const x = event.target.dataset.x;
+    const y = event.target.dataset.y;
+    const cell = board[y][x];
+    const td = event.target;
+
+    if (cell.revealed) return;
+
+    if (cell.flagged) {
+        cell.flagged = false;
+        td.classList.remove('flag');
+        flagsCount--;
+    } else {
+        if (flagsCount < totalMines) {
+            cell.flagged = true;
+            td.classList.add('flag');
+            flagsCount++;
+        }
+    }
+}
+
+// Función para revelar todas las minas cuando se pierde
+function revealAllMines() {
+    const cells = document.querySelectorAll('td');
+    cells.forEach(cell => {
+        const x = cell.dataset.x;
+        const y = cell.dataset.y;
+        const boardCell = board[y][x];
+
+        if (boardCell.mine) {
+            cell.classList.add('mine');
+            cell.innerHTML = '??';
+        }
+    });
+}
+
+startGame();
+</script>
+<section></section>
+  <section></section>
+     <footer>
+<p>&copy; 2025 Flashgames</p>
+</footer>
+</body>
+</html>
