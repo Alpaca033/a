@@ -28,9 +28,10 @@
             border: 2px solid black;
             background-color: #fff;
         }
+      
         #intro {
             font-size: 20px;
-            color: #333;
+            color: #orange;
             padding: 20px;
             background-color: #4CAF50;
             color: white;
@@ -75,7 +76,7 @@
     justify-content: space-around; /* Espaciado uniforme */
     align-items: center;
     height: 200px;
-    background-color: lightgray;
+    background-color: orange;
 }
  
 .caja {
@@ -86,12 +87,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 1px;
 }
+      section {
+            padding: 1rem;
+        }
+ 
  footer {
             background-color: grey;
             color: white;
-            padding: 1rem;
+            padding: 0rem;
             position: fixed;
             bottom: 0;
             width: 100%;
@@ -224,6 +229,7 @@
         if (event.key === "ArrowRight" && direction.x === 0) direction = {x: gridSize, y: 0};
     });
 
+
 </script>
   <table>
         <thead>
@@ -231,7 +237,7 @@
                 <th>#</th>
                 <th>Nombre</th>
                 <th>Puntuación</th>
-                <th>Manazanas</th>
+                <th>Manzanas</th>
             </tr>
         </thead>
         <tbody>
@@ -262,7 +268,7 @@
     </table>
   <main class="contenedor-flex">
 <section class="snake.html">    <a href="snake.html">Juego de la Serpiente</a></section>
-<section class="minesweeper"><a href="buscaminas.html">Buscaminas</a></section>
+<section class="minesweeper"><a href="minesweeper.html">Buscaminas</a></section>
 <section class="formulario.html"><a href="formulario.html">Formulario</a></section>
     
 <footer>
