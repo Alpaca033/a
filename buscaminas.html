@@ -220,7 +220,7 @@ function revealCell(event) {
 
     if (cell.mine) {
         td.classList.add('mine');
-        td.innerHTML = '💣';
+        td.innerHTML = 'X';
         gameOver = true;
         document.getElementById('message').innerHTML = '¡Perdiste! Has tocado una mina. ¡Intenta de nuevo!';
         revealAllMines();
@@ -276,7 +276,7 @@ function revealAllMines() {
 
         if (boardCell.mine) {
             cell.classList.add('mine');
-            cell.innerHTML = '💣';
+            cell.innerHTML = 'X';
         }
     });
 }
