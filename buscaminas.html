@@ -28,7 +28,7 @@
     justify-content: space-around; /* Espaciado uniforme */
     align-items: center;
     height: 200px;
-    background-color: lightgray;
+    background-color: orange;
 }
  
 .caja {
@@ -43,13 +43,13 @@
 }
  
         section {
-            padding: 2rem;
+            padding: 1rem;
         }
  
         footer {
             background-color: grey;
             color: white;
-            padding: 1rem;
+            padding: 0rem;
             position: fixed;
             bottom: 0;
             width: 100%;
@@ -109,6 +109,7 @@
             border: none;
             cursor: pointer;
             margin-top: 10px;
+          margin: 10px;
         }
         .button:hover {
             background-color: #45a049;
@@ -118,11 +119,7 @@
 <body>
 <header> <h1>FLASHGAMES</h1></header>
 <h2>Juego de Buscaminas</h2>
-  <main class="contenedor-flex">
-<section class="snake.html">    <a href="snake.html">Juego de la Serpiente</a></section>
-<section class="minesweeper"><a href="minesweeper.html">Buscaminas</a></section>
-<section class="formulario.html"><a href="formulario.html">Formulario</a></section>
-</main>
+  
   <iframe width="560" height="315" src="https://www.youtube.com/embed/VdB6Ar1_SeY?si=ALH36--QB1BMvvqj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 <div id="message" class="message"></div>
 <table id="minesweeper"></table>
@@ -223,7 +220,7 @@ function revealCell(event) {
 
     if (cell.mine) {
         td.classList.add('mine');
-        td.innerHTML = '??';
+        td.innerHTML = 'X';
         gameOver = true;
         document.getElementById('message').innerHTML = '¡Perdiste! Has tocado una mina. ¡Intenta de nuevo!';
         revealAllMines();
@@ -286,6 +283,11 @@ function revealAllMines() {
 
 startGame();
 </script>
+  <main class="contenedor-flex">
+<section class="snake.html">    <a href="snake.html">Juego de la Serpiente</a></section>
+<section class="minesweeper"><a href="minesweeper.html">Buscaminas</a></section>
+<section class="formulario.html"><a href="formulario.html">Formulario</a></section>
+</main>
 <section></section>
   <section></section>
      <footer>
