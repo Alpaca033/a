@@ -1,76 +1,80 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscaminas</title>
-    <style>
-         body {
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buscaminas</title>
+<style>
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f9;
             color: #333;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
- 
         header {
             background-color: orange;
             color: black;
             padding: 1rem;
-        }
- 
-        h1 {
-            margin: 0;
-        }
-  .contenedor-flex {
-    display: flex;
-    justify-content: space-around; /* Espaciado uniforme */
-    align-items: center;
-    height: 200px;
-    background-color: orange;
-}
- 
-.caja {
-    width: 150px;
-    height: 100px;
-    background-color: steelblue;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-}
- 
-        section {
-            padding: 1rem;
-        }
- 
-        footer {
-            background-color: grey;
-            color: white;
-            padding: 0rem;
-            position: fixed;
-            bottom: 0;
             width: 100%;
         }
-      body {
-        
+        h1 {
+            margin: 0;
+        }
+ 
+        .contenedor-flex {
+            display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
-            flex-direction: column;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+            background-color: lightgray;
+            width: 100%;
         }
-        h1 {
-            font-size: 24px;
-            color: #333;
+ 
+        .caja {
+            width: 150px;
+            height: 100px;
+            background-color: steelblue;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+        }
+ 
+        section a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+        }
+ 
+        section a:hover {
+            background: #ddd;
+        }
+ 
+        iframe {
+            display: block;
+            margin: 20px auto;
+        }
+ 
+        .centrar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         table {
             border-spacing: 0;
             border-collapse: collapse;
+            margin: 20px auto;
         }
         td {
             width: 40px;
@@ -82,6 +86,7 @@
             font-weight: bold;
             cursor: pointer;
         }
+ 
         td.revealed {
             background-color: #fff;
         }
@@ -93,9 +98,6 @@
         }
         td.zero {
             background-color: #e0e0e0;
-        }
-        .hidden {
-            display: none;
         }
         .message {
             font-size: 18px;
@@ -109,23 +111,24 @@
             border: none;
             cursor: pointer;
             margin-top: 10px;
-          margin: 10px;
         }
         .button:hover {
             background-color: #45a049;
         }
-    </style>
+</style>
 </head>
 <body>
-<header> <h1>FLASHGAMES</h1></header>
+<header><h1>FLASHGAMES</h1></header>
 <h2>Juego de Buscaminas</h2>
-  
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/VdB6Ar1_SeY?si=ALH36--QB1BMvvqj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-<div id="message" class="message"></div>
-<table id="minesweeper"></table>
-<button class="button" onclick="startGame()">Comenzar Nuevo Juego</button>
-
-<script>
+ 
+<main class="contenedor-flex">
+<section><a href="snake.html">Juego de la Serpiente</a></section>
+<section><a href="minesweeper.html">Buscaminas</a></section>
+<section><a href="formulario.html">Formulario</a></section>
+</main>
+ 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/VdB6Ar1_SeY?si=ALH36--QB1BMvvqj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+ <script>
 // Tamaño del tablero
 const rows = 8;
 const cols = 8;
@@ -283,16 +286,11 @@ function revealAllMines() {
 
 startGame();
 </script>
-  <main class="contenedor-flex">
-<section class="snake">    <a href="snake.html">Juego de la Serpiente</a></section>
-<section class="minesweeper"><a href="minesweeper.html">Buscaminas</a></section>
-<section class="formulario"><a href="formulario.html">Formulario</a></section>
-</main>
-<section></section>
-  <section></section>
-     <footer>
-<p>&copy; 2025 Flashgames</p>
-</footer>
+<div class="centrar">
+<div id="message" class="message"></div>
+<table id="minesweeper"></table>
+<button class="button" onclick="startGame()">Comenzar Nuevo Juego</button>
+</div>
 </body>
 </html>
 
