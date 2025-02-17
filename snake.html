@@ -12,17 +12,81 @@
             background-color: #f4f4f9;
             color: #333;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
- 
         header {
             background-color: orange;
             color: black;
             padding: 1rem;
+            width: 100%;
         }
- 
         h1 {
             margin: 0;
         }
+ 
+        .contenedor-flex {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 40px;
+            background-color: lightgray;
+            width: 100%;
+        }
+ 
+        .caja {
+            width: 150px;
+            height: 100px;
+            background-color: steelblue;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+        }
+ 
+        section a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+        }
+ 
+        section a:hover {
+            background: #ddd;
+        }
+ 
+        iframe {
+            display: block;
+            margin: 20px auto;
+        }
+ 
+        .centrar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        td {
+            width: 40px;
+            height: 40px;
+            background-color: #ccc;
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid #999;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
  
         canvas {
             border: 2px solid black;
@@ -71,24 +135,7 @@
         tr:hover {
             background-color: #e2e2e2;
         }
-      .contenedor-flex {
-    display: flex;
-    justify-content: space-around; /* Espaciado uniforme */
-    align-items: center;
-    height: 200px;
-    background-color: orange;
-}
- 
-.caja {
-    width: 150px;
-    height: 100px;
-    background-color: steelblue;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 1px;
-}
+      
       section {
             padding: 1rem;
         }
@@ -108,7 +155,7 @@
   <header> <h1>DETUBAGAMES</h1></header>
 <section>
 </section>
-
+<iframe src="https://drive.google.com/file/d/1HdsiACn6DYOgw5S9Uc9P0jaQv-Aes-fF/preview" width="300" height="300" allow="autoplay"></iframe>
 <div id="intro">
     <h2>Bienvenido al Juego de la Serpiente</h2>
     <p>Controla la serpiente con las teclas de dirección y come la comida. ¡Evita chocar con las paredes y contigo mismo!</p>
@@ -267,9 +314,9 @@
         </tfoot>
     </table>
   <main class="contenedor-flex">
-<section class="snake.html">    <a href="snake.html">Juego de la Serpiente</a></section>
-<section class="Buscaminas.html"><a href="Buscaminas.html">Buscaminas</a></section>
-<section class="formulario.html"><a href="formulario.html">Formulario</a></section>
+<section class="snake">    <a href="snake.html">Juego de la Serpiente</a></section>
+<section class="minesweeper"><a href="minesweeper.html">Buscaminas</a></section>
+<section class="formulario"><a href="formulario.html">Formulario</a></section>
     
 <footer>
 <p>&copy; 2025 Detubagames</p>
