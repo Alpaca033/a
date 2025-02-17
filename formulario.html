@@ -24,23 +24,64 @@
             margin: 0;
         }
   .contenedor-flex {
-    display: flex;
-    justify-content: space-around; /* Espaciado uniforme */
-    align-items: center;
-    height: 200px;
-    background-color: orange;
-}
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+            background-color: lightgray;
+            width: 100%;
+        }
  
-.caja {
-    width: 150px;
-    height: 100px;
-    background-color: steelblue;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-}
+        .caja {
+            width: 150px;
+            height: 100px;
+            background-color: steelblue;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+        }
+   section a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+        }
+ 
+        section a:hover {
+            background: #ddd;
+        }
+ 
+        iframe {
+            display: block;
+            margin: 20px auto;
+        }
+ 
+        .centrar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        td {
+            width: 40px;
+            height: 40px;
+            background-color: #ccc;
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid #999;
+            font-weight: bold;
+            cursor: pointer;
+        }
  
         section {
             padding: 1rem;
@@ -92,7 +133,11 @@
 <body>
  <header> <h1>DETUBAGAMES</h1></header>
     <h2>Formulario de Bugs</h2>
- 
+ <main class="contenedor-flex">
+<section class="snake">    <a href="snake.html">Juego de la Serpiente</a></section>
+<section class="minesweeper"><a href="minesweeper.html">Buscaminas</a></section>
+<section class="formulario"><a href="formulario.html">Formulario</a></section>
+</main>
     <form action="procesar.php" method="POST">
 <label for="nombre">Nombre y Apellidos:</label>
 <input type="text" id="nombre" name="nombre" required>
@@ -105,11 +150,7 @@
  
         <button type="submit">Enviar</button>
 </form>
- <main class="contenedor-flex">
-<section class="snake.html">    <a href="snake.html">Juego de la Serpiente</a></section>
-<section class="minesweeper"><a href="minesweeper.html">Buscaminas</a></section>
-<section class="formulario.html"><a href="formulario.html">Formulario</a></section>
-</main>
+ 
   <section></section>
   <section></section>
      <footer>
